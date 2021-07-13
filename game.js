@@ -1,119 +1,96 @@
 import { Board } from "./board.js";
+import { Display } from "./display.js";
 
 export const Game = (() => {
-
-  let oTurn = false;
-  const X_CLASS = "x";
-  const O_CLASS = "o";
-  const cellElements = document.querySelectorAll(".cell");
-  const boardElement = document.querySelector("#board");
-  const resetButton = document.querySelector(".resetButton");
+  let isOTurn = false;
+  let isAiTurn = false;
+  let playAsX = true;
 
   function startGame() {
-    oTurn = false;
+    isOTurn = false;
+    isAiTurn = !playAsX;
     Board.reset();
-    initializeDisplay();
-  }
-
-  function initializeDisplay() {
-    cellElements.forEach(cell => {
-      cell.classList.remove("no-click");
-      cell.addEventListener("click", handleClick, {
-        once: true
-      })
-    });
-    resetButton.addEventListener("click", handleReset);
-    changeHoverDisplay(oTurn);
-  }
-
-  function disableDisplay() {
-    boardElement.classList.remove(X_CLASS);
-    boardElement.classList.remove(O_CLASS);
-    cellElements.forEach(cell => {
-      cell.classList.add("no-click")
-      cell.removeEventListener("click", handleClick);
-    });
-  }
-
-  function changePlayer() {
-    oTurn = !oTurn;
-    if (oTurn) {
-      setTimeout(aiPlayer, 5000);
+    Display.initialize(
+      startGame,
+      handlePlayerMoveClick,
+      handleSelectX,
+      handleSelectO,
+      isAiTurn,
+      isOTurn,
+      playAsX,
+    );
+    if (isAiTurn) {
+      aiMove();
     }
   }
 
-  function markDisplay(cell, currentClass) {
-    cell.classList.add(currentClass);
-  }
 
-  function changeHoverDisplay() {
-    if (oTurn) {
-      boardElement.classList.remove(X_CLASS);
-      boardElement.classList.add(O_CLASS);
-    } else {
-      boardElement.classList.remove(O_CLASS);
-      boardElement.classList.add(X_CLASS);
-    }
-  };
-
-  function resetDisplay() {
-    cellElements.forEach(cell => {
-      cell.classList.remove(X_CLASS);
-      cell.classList.remove(O_CLASS);
-    });
+  function handleSelectX(e) {
+    playAsX = true;
     startGame();
   }
 
+  function handleSelectO(e) {
+    playAsX = false;
+    startGame();
+  }
+
+  function changePlayer() {
+    isOTurn = !isOTurn;
+    isAiTurn = !isAiTurn;
+    Display.update(handlePlayerMoveClick, isAiTurn, isOTurn);
+    if (isAiTurn) {
+      aiMove();
+    }
+  }
+
   function updateGame(cell, squareId) {
-    const currentClass = oTurn ? O_CLASS : X_CLASS;
-    Board.place(currentClass, squareId);
-    markDisplay(cell, currentClass);
+    let currentMark = Display.setMark(cell, isOTurn);
+    Board.place(currentMark, squareId);
     let winner = Board.checkWinner();
     let tie = Board.checkTie();
     if (winner) {
       // changeDisplay();
-      alert(`${winner} is the winner`)
-      disableDisplay();
+      alert(`${winner} is the winner`);
+      Display.disable();
     } else if (tie) {
       // change display
-      alert(`It's a tie`)
+      alert(`It's a tie`);
     } else {
       changePlayer();
-      changeHoverDisplay(oTurn);
+      Display.update(handlePlayerMoveClick, isAiTurn, isOTurn);
     }
   }
 
-  function handleClick(e) {
+  function handlePlayerMoveClick(e) {
     const cell = e.target;
     const squareId = e.target.id;
-    console.log(squareId);
-    updateGame(cell, squareId)
-  }
-
-  function handleReset(e) {
-    e.preventDefault();
-    resetDisplay();
+    updateGame(cell, squareId);
   }
 
   function randomNumber(max) {
     return Math.floor(Math.random() * max);
   }
 
-  function aiPlayer() {
+  function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  async function aiPick() {
+    await sleep(5000);
     let emptySquareIndices = Board.getEmptySquareIndices();
     let randomIndex = randomNumber(emptySquareIndices.length);
     let play = emptySquareIndices[randomIndex];
-    updateGame(cellElements[play], play);
+    return play;
+  }
+
+  function aiMove() {
+    aiPick().then((play) => {
+      updateGame(Display.cellElements[play], play);
+    });
   }
 
   return {
     startGame,
-  }
+  };
 })();
-
-
-
-
-
-
-

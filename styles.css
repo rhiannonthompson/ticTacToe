@@ -11,17 +11,37 @@ body{
   margin: 0;
 }
 
-.buttonContainer {
+/* for testing only */
+.reset-container {
   display: flex;
   justify-content: space-around;
   align-items: center;
   padding: 20px;
   flex-direction: column;
+  margin: 30px;
+
+}
+
+/* for testing only */
+.btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  margin: 30px;
+}
+
+.select {
+  background-color: aquamarine;
+}
+
+.btn {
+  margin-right: 5px;
 }
 
 .board {
-  width: 100vw;
-  height: 80vh;
+  max-width: 100vw;
+  max-height: 50vh;
   display: grid;
   justify-content: center;
   align-content: center;
