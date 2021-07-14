@@ -11,6 +11,13 @@ body{
   margin: 0;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 1000px;
+  margin: auto;
+}
+
 /* for testing only */
 .reset-container {
   display: flex;
@@ -23,9 +30,9 @@ body{
 }
 
 /* for testing only */
-.btn-container {
+.controls-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   padding: 20px;
   margin: 30px;
@@ -37,6 +44,16 @@ body{
 
 .btn {
   margin-right: 5px;
+  padding: 16px;
+}
+
+.resetButton {
+  padding: 16px;
+}
+
+.dropdown {
+  padding: 16px;
+  margin-right: 20px;
 }
 
 .board {

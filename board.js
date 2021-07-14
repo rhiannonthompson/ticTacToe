@@ -35,7 +35,6 @@ export const Board = (function () {
       return;
     }
     squares[squareId] = player;
-    // render();
   }
 
   function unplace(squareId) {
