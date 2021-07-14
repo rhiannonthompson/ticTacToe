@@ -35,7 +35,11 @@ export const Board = (function () {
       return;
     }
     squares[squareId] = player;
-    render();
+    // render();
+  }
+
+  function unplace(squareId) {
+    squares[squareId] = null;
   }
 
   function reset() {
@@ -55,8 +59,10 @@ export const Board = (function () {
     reset,
     render,
     getEmptySquareIndices,
+    unplace,
   }
 })();
+
 
 
 

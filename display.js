@@ -88,5 +88,7 @@ export const Display = (() => {
     addBoardClickListeners,
     update,
     setMark,
+    O_CLASS,
+    X_CLASS,
   };
 })();

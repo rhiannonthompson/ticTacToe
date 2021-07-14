@@ -1,5 +1,6 @@
 import { Board } from "./board.js";
 import { Display } from "./display.js";
+import { AiPlayer } from "./aiPlayer.js";
 
 export const Game = (() => {
   let isOTurn = false;
@@ -68,19 +69,14 @@ export const Game = (() => {
     updateGame(cell, squareId);
   }
 
-  function randomNumber(max) {
-    return Math.floor(Math.random() * max);
-  }
-
   function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
   async function aiPick() {
-    await sleep(5000);
-    let emptySquareIndices = Board.getEmptySquareIndices();
-    let randomIndex = randomNumber(emptySquareIndices.length);
-    let play = emptySquareIndices[randomIndex];
+    await sleep(500);
+    let player = isOTurn ? Display.O_CLASS : Display.X_CLASS;
+    let play = AiPlayer.pickMove(player);
     return play;
   }
 
