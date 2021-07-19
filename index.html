@@ -11,7 +11,68 @@
 </head>
 
 <body>
-  <div class="container">
+  <div class="page-container">
+
+    <nav class="navbar">
+      <div class="nav-controls">
+      <select class="dropdown" name="difficulty" id="difficulty-list">
+        <option selected disabled hidden>Choose Difficulty</option>
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+        <option value="impossible">Impossible</option>
+      </select>
+      <button class="mode">Two player</button>
+    </div>
+    <div class="logo">
+      <h1>Logo</h1>
+    </div>
+    </nav>
+
+    <div class="controls-container">
+      <div class="btn-container">
+        <button class="btn btn-x">Play X</button>
+        <button class="btn btn-o">Play O</button>
+      </div>
+      <p>player turn</p>
+    </div>
+
+    <div class="board-container">
+      <div class="board" id="board">
+        <div class="cell" id="0"></div>
+        <div class="cell" id="1"></div>
+        <div class="cell" id="2"></div>
+        <div class="cell" id="3"></div>
+        <div class="cell" id="4"></div>
+        <div class="cell" id="5"></div>
+        <div class="cell" id="6"></div>
+        <div class="cell" id="7"></div>
+        <div class="cell" id="8"></div>
+      </div>
+    </div>
+
+    <div class="reset-container">
+      <button class="btn reset">Replay</button>
+    </div>
+    <div class="footer-container">
+      <p>By Rhiannon Thompson</p>
+    </div>  
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- <div class="container">
     <div class="controls-container">
       <select class="dropdown" name="difficulty" id="difficulty-list">   
         <option selected disabled hidden>Choose Difficulty</option>
@@ -43,7 +104,7 @@
       <button class="resetButton">Replay</button>
     </div>
 
-  </div>
+  </div> -->
 </body>
 
 </html>

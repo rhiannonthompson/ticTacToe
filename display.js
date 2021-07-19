@@ -3,7 +3,7 @@ export const Display = (() => {
   const O_CLASS = "o";
   const cellElements = document.querySelectorAll(".cell");
   const boardElement = document.querySelector("#board");
-  const resetButton = document.querySelector(".resetButton");
+  const resetButton = document.querySelector(".reset");
   const selectX = document.querySelector(".btn-x");
   const selectO = document.querySelector(".btn-o");
   const dropdown = document.querySelector("#difficulty-list");
