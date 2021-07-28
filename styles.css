@@ -1,73 +1,90 @@
-*, *::after, *::before {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 :root {
-  --cell-size: 95px;
+  --cell-size: 90px;
   --mark-size: calc(var(--cell-size)* .9);
   --dark-gray: #4d5166;
   --slate-blue: #3b434b;
   --chalk-white: #f7efee;
+  --blue: #72bba6;
+  --blue-light: #72bba65d;
 }
 
-body{
+*, *::after, *::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Gaegu', cursive;
+  color: var(--chalk-white);
+  font-size: 16px;
+}
+
+@media only screen and (min-width: 600px) {
+  :root {
+    --cell-size: 100px;
+  }
+  h1 {
+    font-size: 2rem;
+    font-weight: 100;
+  }
+}
+
+@media only screen and (min-height: 1000px) {
+  :root {
+    --cell-size: 150px;
+  }
+}
+
+body, html {
   margin: 0;
   background-color: var(--dark-gray);
-  color: #fff;
+  color: var(--chalk-white);
+  font-size: 24px;
 }
 
 h1 {
-  font-size: 16px;
+  font-size: 1rem;
+  font-weight: 400;
   margin: 0;
 }
 
 p {
   padding: 8px;
+  padding-bottom: 0;
 }
 
 /********************************************/
 /**************** Layout *******************/
 /******************************************/
 
-.page-container {
+.page-container,
+.board-container,
+.reset-container {
   display: flex;
+}
+
+.page-container {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   min-height: 100vh;
 }
 
-.controls-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .btn-container {
-  display: flex;
-  justify-content: center;
+  position: absolute;
+  margin-top: 20px;
 }
 
 .board-container {
-  display: flex;
   width: 100vw;
-  min-height: 60vh;
+  min-height: 56vh;
   justify-content: center;
   background-color: var(--slate-blue);
 }
 
 .reset-container {
-  /* margin-top: 16px; */
+  justify-content: center;
+  min-height: 8vh;
 }
 
-.footer-container {
-  width: 100vw;
-  background-color: rgb(230, 230, 230);
-  display: flex;
-  justify-content: center;
-}
 
 /********************************************/
 /**************** Navbar *******************/
@@ -75,15 +92,12 @@ p {
 
 nav {
   min-width: 100vw;
-  padding: 24px 16px;
+  padding: 34px 16px 8px 16px;
   margin-top: -2px;
   display: flex;
   justify-content: space-between;
+  align-content: center;
   background-color: var(--dark-gray);
-}
-
-.logo{
-  /* border: 2px solid yellow; */
 }
 
 .nav-controls {
@@ -91,21 +105,183 @@ nav {
   justify-content: flex-end;
 }
 
+.logo {
+  margin-right: 20px;
+  align-self: center;
+}
+
+/********************************************/
+/**************** Dropdown *****************/
+/******************************************/
+
+.btn-dropdown, .dropdown-content {
+  min-width: 110px;
+}
+
+.btn-dropdown {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 4px;
+  background-color: transparent;
+  border: 3px double var(--chalk-white);
+  cursor: pointer;
+  box-shadow: inset 0px 0px 8px 1px var(--blue);
+}
+
+.down-icon {
+  padding-left: 5px;
+  font-size: 1rem;
+}
+
+.btn-text {
+  font-size: 0.6rem;
+  font-weight: 500;
+  margin-left: 8px;
+}
+
+@media only screen and (min-width: 600px) {
+  .btn-dropdown, .dropdown-content {
+    min-width: 180px;
+    padding: 8px 4px;
+  }
+
+  .btn-text {
+    font-size: 1rem;
+  }
+
+  .dropdown-content span {
+    font-size: 1rem;
+  }
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--chalk-white);
+  width: 100px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content span {
+  color: var(--slate-blue);
+  padding: 12px 16px;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: block;
+  cursor: pointer;
+}
+
+.dropdown-content span:hover,
+.dropdown-content span:focus {
+  background-color: var(--blue-light);
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .btn-dropdown {
+  background-color: var(--blue);
+  border: 3px double var(--chalk-white);
+}
+
 /********************************************/
 /**************** Buttons ******************/
 /******************************************/
 
+.btn,
+svg {
+  width: 100px;
+  height: 32px;
+}
+
 .btn {
-  margin: 10px;
-  min-width: 20vw;
-  padding: 8px 16px;
-  border: none;
-  background-color: rgb(224, 224, 224);
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
+  cursor: pointer;
+  background: transparent;
+  border: 3px double var(--chalk-white);
+  box-shadow: inset 0px 0px 8px 1px var(--blue);
+  outline: none;
+  transition: 0.5s ease-in-out;
+  -webkit-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -ms-transition: 0.5s ease-in-out;
+  -o-transition: 0.5s ease-in-out;
+}
+
+.btn-x,
+.btn-o,
+.reset,
+svg {
+  position: absolute;
+}
+
+.btn-x, .btn-o {
+  bottom: 10px;
+}
+
+.reset {
+  bottom: 4%;
+}
+
+.btn-x {
+  right: 5px;
+}
+
+.btn-o {
+  left: 5px;
+}
+
+svg {
+  left: -3px;
+  top: -3px;
+  fill: none;
+  stroke: #4d5166;
+  stroke-dasharray: 150 480;
+  stroke-dashoffset: 150;
+  transition: 0.5s ease-in-out;
+  -webkit-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -ms-transition: 0.5s ease-in-out;
+  -o-transition: 0.5s ease-in-out;
+}
+
+.select {
+  box-shadow: inset 0px 0px 20px 10px var(--blue);
+}
+
+@media(hover: hover) and (pointer: fine) {
+  .btn:hover {
+    transition: 1s ease-in-out;
+    box-shadow: inset 0px 0px 22px 10px var(--blue);
+    -webkit-transition: 1s ease-in-out;
+    -moz-transition: 1s ease-in-out;
+    -ms-transition: 1s ease-in-out;
+    -o-transition: 1s ease-in-out;
+}
+
+  .btn:hover svg {
+    stroke-dashoffset: -480;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .btn, svg {
+    width: 180px;
+    height: 46px;
+  }
+  .btn span {
+    font-weight: 500;
+    font-size: 1.2rem;
+  }
 }
 
 /********************************************/
@@ -119,6 +295,33 @@ nav {
   justify-items: center;
   align-items: center;
   grid-template-columns: repeat(3, auto);
+}
+
+.visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 2s linear;
+  -webkit-transition: opacity 2s linear;
+  -moz-transition: opacity 2s linear;
+  -ms-transition: opacity 2s linear;
+  -o-transition: opacity 2s linear;
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 2s, opacity 2s linear;
+  -webkit-transition: visibility 0s 2s, opacity 2s linear;
+  -moz-transition: visibility 0s 2s, opacity 2s linear;
+  -ms-transition: visibility 0s 2s, opacity 2s linear;
+  -o-transition: visibility 0s 2s, opacity 2s linear;
+}
+
+.winningMessage {
+  position: absolute;
+  top: 52%;
+  z-index: 0;
+  font-size: 2rem;
 }
 
 .cell {
@@ -161,13 +364,13 @@ nav {
 .cell.x::before,
 .cell.x::after,
 .cell.o::before {
-  background-color: black;
+  background-color: var(--chalk-white);
 }
 
 .board.x .cell:not(.x):not(.o):hover::before,
 .board.x .cell:not(.x):not(.o):hover::after,
 .board.o .cell:not(.x):not(.o):hover::before {
-  background-color: lightgray;
+  background-color: var(--chalk-white);
 }
 
 .cell.x::before,
@@ -221,7 +424,7 @@ nav {
 .board.o .cell:not(.x):not(.o):hover::after {
   width: calc(var(--mark-size) * .6);
   height: calc(var(--mark-size) * .6);
-  background-color: white;
+  background-color: var(--slate-blue);
 }
 
 /********************************************/

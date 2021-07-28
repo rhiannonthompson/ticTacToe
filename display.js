@@ -1,12 +1,15 @@
 export const Display = (() => {
   const X_CLASS = "x";
   const O_CLASS = "o";
+  const TIE_MESSAGE = "It's a tie";
   const cellElements = document.querySelectorAll(".cell");
   const boardElement = document.querySelector("#board");
   const resetButton = document.querySelector(".reset");
   const selectX = document.querySelector(".btn-x");
   const selectO = document.querySelector(".btn-o");
-  const dropdown = document.querySelector("#difficulty-list");
+  const dropdownText = document.querySelector(".btn-text");
+  const options = document.querySelectorAll(".options");
+  const winningMessage = document.querySelector(".winningMessage");
 
   /**
    * Initializes the DOM elements and sets event listeners 
@@ -25,7 +28,7 @@ export const Display = (() => {
     handleSelectO,
     handleSelectDifficulty,
     isAiTurn,
-    playAsX
+    playAsX,
   ) {
     cellElements.forEach((cell) => {
       cell.classList.remove(X_CLASS);
@@ -38,7 +41,11 @@ export const Display = (() => {
     resetButton.addEventListener("click", handleReset);
     selectX.addEventListener("click", handleSelectX);
     selectO.addEventListener("click", handleSelectO);
-    dropdown.addEventListener("click", handleSelectDifficulty);
+    options.forEach(option => {
+      option.addEventListener("click", updateDifficultyText);
+      option.addEventListener("click", handleSelectDifficulty);
+    });
+    removeWinningMessage();
     if (playAsX) {
       selectX.classList.add("select");
       selectO.classList.remove("select");
@@ -50,6 +57,14 @@ export const Display = (() => {
   }
 
   /**
+   * Changes the difficulty text to the selected difficulty. 
+   * @param {function} e Event for difficulty selection. 
+   */
+   function updateDifficultyText(e) {
+    dropdownText.textContent = e.target.dataset.value;
+  }
+
+  /**
    * Disables event listeners and removes hover styling on board cells. 
    * @param {function} handleClick Event listener for cell selection. 
    */
@@ -57,6 +72,37 @@ export const Display = (() => {
     boardElement.classList.remove(X_CLASS);
     boardElement.classList.remove(O_CLASS);
     removeBoardClickListeners(handleClick);
+  }
+  
+  /**
+   * Displays a message saying who wins.
+   * @param {string} winner Either "x" or "o".
+   */
+  function showWinningMessage(winner) {
+    boardElement.classList.add("hidden");
+    winningMessage.textContent = `${winner.toUpperCase()} wins!`;
+    winningMessage.classList.remove("hidden");
+    winningMessage.classList.add("visible");
+  }
+
+  /**
+   * Displays a message saying its a tie.
+   */
+  function showTieMessage() {
+    boardElement.classList.add("hidden");
+    winningMessage.textContent = TIE_MESSAGE;
+    winningMessage.classList.remove("hidden");
+    winningMessage.classList.add("visible");
+  }
+
+  /**
+   * Removes the message saying who wins.
+   */
+  function removeWinningMessage() {
+    winningMessage.textContent = "";
+    boardElement.classList.remove("hidden");
+    winningMessage.classList.remove("visible");
+    winningMessage.classList.add("hidden");
   }
 
   /**
@@ -124,6 +170,8 @@ export const Display = (() => {
     addBoardClickListeners,
     update,
     setMark,
+    showWinningMessage,
+    showTieMessage,
     O_CLASS,
     X_CLASS,
   };
