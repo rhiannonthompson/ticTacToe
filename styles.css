@@ -1,6 +1,6 @@
 :root {
   --cell-size: 90px;
-  --mark-size: calc(var(--cell-size)* .9);
+  --mark-size: calc(var(--cell-size) * 0.9);
   --dark-gray: #4d5166;
   --slate-blue: #3b434b;
   --chalk-white: #f7efee;
@@ -8,11 +8,13 @@
   --blue-light: #72bba65d;
 }
 
-*, *::after, *::before {
+*,
+*::after,
+*::before {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Gaegu', cursive;
+  font-family: "Gaegu", cursive;
   color: var(--chalk-white);
   font-size: 16px;
 }
@@ -29,7 +31,8 @@
   }
 }
 
-body, html {
+body,
+html {
   margin: 0;
   background-color: var(--dark-gray);
   color: var(--chalk-white);
@@ -65,22 +68,22 @@ p {
 }
 
 .btn-container {
-  position: absolute;
-  margin-top: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 .board-container {
   width: 100vw;
-  min-height: 56vh;
+  min-height: 60vh;
   justify-content: center;
   background-color: var(--slate-blue);
 }
 
 .reset-container {
   justify-content: center;
-  min-height: 8vh;
+  align-items: baseline;
+  min-height: 10vh;
 }
-
 
 /********************************************/
 /**************** Navbar *******************/
@@ -110,7 +113,8 @@ nav {
 /**************** Dropdown *****************/
 /******************************************/
 
-.btn-dropdown, .dropdown-content {
+.btn-dropdown,
+.dropdown-content {
   width: 160px;
 }
 
@@ -118,7 +122,6 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 42px;
   padding: 2px 4px;
   background-color: transparent;
   border: 3px double var(--chalk-white);
@@ -126,7 +129,7 @@ nav {
 }
 
 .down-icon {
-  padding-left: 5px;
+  padding-left: 4px;
   font-size: 1rem;
 }
 
@@ -137,7 +140,8 @@ nav {
 }
 
 @media only screen and (min-width: 600px) {
-  .btn-dropdown, .dropdown-content {
+  .btn-dropdown,
+  .dropdown-content {
     min-width: 180px;
     padding: 8px 4px;
   }
@@ -166,7 +170,7 @@ nav {
   display: none;
   position: absolute;
   background-color: var(--chalk-white);
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
@@ -198,71 +202,31 @@ nav {
 /**************** Buttons ******************/
 /******************************************/
 
-.btn,
-svg {
-  width: 130px;
-  height: 42px;
-}
-
 .btn {
   cursor: pointer;
   background: transparent;
   border: 3px double var(--chalk-white);
+  padding: 4px 16px;
+  margin: 0 8px;
   outline: none;
+  font-size: 1rem;
+  font-weight: 500;
   transition: 0.5s ease-in-out;
   -webkit-transition: 0.5s ease-in-out;
   -moz-transition: 0.5s ease-in-out;
   -ms-transition: 0.5s ease-in-out;
   -o-transition: 0.5s ease-in-out;
-}
-
-.btn-x,
-.btn-o,
-.reset,
-svg {
-  position: absolute;
-}
-
-.btn-x, .btn-o {
-  bottom: 10px;
 }
 
 .reset {
-  bottom: 3%;
-}
-
-.btn-x {
-  right: 5px;
-}
-
-.btn-o {
-  left: 5px;
-}
-
-.btn span {
-  font-weight: 500;
-  font-size: 1rem;
-}
-
-svg {
-  left: -3px;
-  top: -3px;
-  fill: none;
-  stroke: #4d5166;
-  stroke-dasharray: 150 480;
-  stroke-dashoffset: 150;
-  transition: 0.5s ease-in-out;
-  -webkit-transition: 0.5s ease-in-out;
-  -moz-transition: 0.5s ease-in-out;
-  -ms-transition: 0.5s ease-in-out;
-  -o-transition: 0.5s ease-in-out;
+  margin: 0;
 }
 
 .select {
   box-shadow: inset 0px 0px 20px 10px var(--blue);
 }
 
-@media(hover: hover) and (pointer: fine) {
+@media (hover: hover) and (pointer: fine) {
   .btn:hover {
     transition: 1s ease-in-out;
     box-shadow: inset 0px 0px 22px 10px var(--blue);
@@ -270,20 +234,11 @@ svg {
     -moz-transition: 1s ease-in-out;
     -ms-transition: 1s ease-in-out;
     -o-transition: 1s ease-in-out;
-}
-
-  .btn:hover svg {
-    stroke-dashoffset: -480;
   }
 }
 
 @media only screen and (min-width: 600px) {
-  .btn, svg {
-    width: 180px;
-    height: 46px;
-  }
-  .btn span {
-    font-weight: 500;
+  .btn {
     font-size: 1.2rem;
   }
 }
@@ -382,7 +337,7 @@ svg {
 .board.x .cell:not(.x):not(.o):hover::before,
 .board.x .cell:not(.x):not(.o):hover::after {
   content: "";
-  width: calc(var(--mark-size) * .15);
+  width: calc(var(--mark-size) * 0.15);
   height: var(--mark-size);
   position: absolute;
 }
@@ -420,14 +375,14 @@ svg {
 
 .cell.o::before,
 .board.o .cell:not(.x):not(.o):hover::before {
-  width: calc(var(--mark-size) * .9);
-  height: calc(var(--mark-size) * .9);
+  width: calc(var(--mark-size) * 0.9);
+  height: calc(var(--mark-size) * 0.9);
 }
 
 .cell.o::after,
 .board.o .cell:not(.x):not(.o):hover::after {
-  width: calc(var(--mark-size) * .6);
-  height: calc(var(--mark-size) * .6);
+  width: calc(var(--mark-size) * 0.6);
+  height: calc(var(--mark-size) * 0.6);
   background-color: var(--slate-blue);
 }
 
