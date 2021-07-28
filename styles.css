@@ -111,13 +111,14 @@ nav {
 /******************************************/
 
 .btn-dropdown, .dropdown-content {
-  min-width: 110px;
+  width: 160px;
 }
 
 .btn-dropdown {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 42px;
   padding: 2px 4px;
   background-color: transparent;
   border: 3px double var(--chalk-white);
@@ -130,7 +131,7 @@ nav {
 }
 
 .btn-text {
-  font-size: 0.6rem;
+  font-size: 1rem;
   font-weight: 500;
   margin-left: 8px;
 }
@@ -165,7 +166,6 @@ nav {
   display: none;
   position: absolute;
   background-color: var(--chalk-white);
-  width: 100px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
@@ -200,8 +200,8 @@ nav {
 
 .btn,
 svg {
-  width: 100px;
-  height: 32px;
+  width: 130px;
+  height: 42px;
 }
 
 .btn {
@@ -228,7 +228,7 @@ svg {
 }
 
 .reset {
-  bottom: 4%;
+  bottom: 6%;
 }
 
 .btn-x {
@@ -237,6 +237,11 @@ svg {
 
 .btn-o {
   left: 5px;
+}
+
+.btn span {
+  font-weight: 500;
+  font-size: 1rem;
 }
 
 svg {
