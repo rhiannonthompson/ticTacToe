@@ -4,11 +4,12 @@ import { AiPlayer } from "./aiPlayer.js";
 
 export const Game = (() => {
 
+  const AI_SLEEP = 500;
   let difficulty = "easy";
   let isOTurn = false;
   let isAiTurn = false;
   let playAsX = true;
-
+  
   /**
    * Resets all DOM elements and the board state for a new game.
    */
@@ -35,7 +36,7 @@ export const Game = (() => {
    * @param {event} e DOM event. 
    */
   function handleSelectDifficulty(e) {
-    difficulty = e.target.value;
+    difficulty = e.target.dataset.value;
     startGame();
   }
 
@@ -91,7 +92,7 @@ export const Game = (() => {
    * @returns The id of the picked available board square.
    */
   async function aiPick() {
-    await sleep(500);
+    await sleep(AI_SLEEP);
     let player = isOTurn ? Display.O_CLASS : Display.X_CLASS;
     let play = AiPlayer.pickMove(player, difficulty);
     return play;
@@ -117,12 +118,10 @@ export const Game = (() => {
     let winner = Board.checkWinner();
     let tie = Board.checkTie();
     if (winner) {
-      // changeDisplay();
-      alert(`${winner} is the winner`);
+      Display.showWinningMessage(winner);
       Display.disable();
     } else if (tie) {
-      // changeDisplay();
-      alert(`It's a tie`);
+      Display.showTieMessage();
     } else {
       changePlayer();
       Display.update(handlePlayerMoveClick, isAiTurn, isOTurn);
