@@ -21,10 +21,6 @@
   :root {
     --cell-size: 100px;
   }
-  h1 {
-    font-size: 2rem;
-    font-weight: 100;
-  }
 }
 
 @media only screen and (min-height: 1000px) {
@@ -126,7 +122,6 @@ nav {
   background-color: transparent;
   border: 3px double var(--chalk-white);
   cursor: pointer;
-  box-shadow: inset 0px 0px 8px 1px var(--blue);
 }
 
 .down-icon {
@@ -152,6 +147,11 @@ nav {
 
   .dropdown-content span {
     font-size: 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 100;
   }
 }
 
@@ -208,7 +208,6 @@ svg {
   cursor: pointer;
   background: transparent;
   border: 3px double var(--chalk-white);
-  box-shadow: inset 0px 0px 8px 1px var(--blue);
   outline: none;
   transition: 0.5s ease-in-out;
   -webkit-transition: 0.5s ease-in-out;
