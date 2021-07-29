@@ -1,5 +1,6 @@
 export const Board = (function () {
   let squares = Array(9).fill(null);
+  let winningCombo = null;
   const WINNING_COMBOS = [
     [0, 1, 2],
     [3, 4, 5],
@@ -37,10 +38,19 @@ export const Board = (function () {
         squares[a] === squares[b] &&
         squares[a] === squares[c]
       ) {
+        winningCombo = [a, b, c];
         return squares[a];
       }
     }
     return null;
+  }
+
+  /**
+   * Gets the winning combination.
+   * @returns {array} Id of winning squares.
+   */
+  function getWinningCombo() {
+    return winningCombo;
   }
 
   /**
@@ -85,5 +95,6 @@ export const Board = (function () {
     reset,
     getEmptySquareIndices,
     unplace,
+    getWinningCombo
   };
 })();

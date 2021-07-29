@@ -3,13 +3,12 @@ import { Display } from "./display.js";
 import { AiPlayer } from "./aiPlayer.js";
 
 export const Game = (() => {
-
   const AI_SLEEP = 500;
   let difficulty = "easy";
   let isOTurn = false;
   let isAiTurn = false;
   let playAsX = true;
-  
+
   /**
    * Resets all DOM elements and the board state for a new game.
    */
@@ -24,7 +23,7 @@ export const Game = (() => {
       handleSelectO,
       handleSelectDifficulty,
       isAiTurn,
-      playAsX,
+      playAsX
     );
     if (isAiTurn) {
       aiMove();
@@ -33,7 +32,7 @@ export const Game = (() => {
 
   /**
    * Defines the event handler for setting the game's difficulty.
-   * @param {event} e DOM event. 
+   * @param {event} e DOM event.
    */
   function handleSelectDifficulty(e) {
     difficulty = e.target.dataset.value;
@@ -63,7 +62,22 @@ export const Game = (() => {
   function handlePlayerMoveClick(e) {
     const cell = e.target;
     const squareId = e.target.id;
-    updateGame(cell, squareId);
+    if (checkCellAvailable(squareId)) {
+      updateGame(cell, squareId);
+    } else {
+      return;
+    }
+  }
+
+  /**
+   * Checks if cell is already played.
+   * @param {string} squareId The id of the board square in (0, 8).
+   * @returns {boolean} Is the cell available. 
+   */
+  function checkCellAvailable(squareId) {
+    let available = Board.getEmptySquareIndices();
+    let squareIdNum = parseInt(squareId, 10);
+    return available.includes(squareIdNum);
   }
 
   /**
@@ -81,14 +95,14 @@ export const Game = (() => {
   /**
    * Sets a promise to resolve an action after a set number of milliseconds.
    * @param {number} ms Time in milliseconds.
-   * @returns {promise} Instruction to resolve after a specified time. 
+   * @returns {promise} Instruction to resolve after a specified time.
    */
   function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
   /**
-   * Sets the turn("x" or "o") and picks the move for the Ai. 
+   * Sets the turn("x" or "o") and picks the move for the Ai.
    * @returns The id of the picked available board square.
    */
   async function aiPick() {
@@ -109,19 +123,26 @@ export const Game = (() => {
 
   /**
    * Controls flow of gameplay, updating DOM and Board state based on player and Ai actions.
-   * @param {node} cell Node for a board cell. 
-   * @param {number} squareId The id of the board square in (0, 8).
+   * @param {node} cell Node for a board cell.
+   * @param {string} squareId The id of the board square in (0, 8).
    */
   function updateGame(cell, squareId) {
     let currentMark = Display.setMark(cell, isOTurn);
+    checkCellAvailable();
     Board.place(currentMark, squareId);
     let winner = Board.checkWinner();
     let tie = Board.checkTie();
     if (winner) {
-      Display.showWinningMessage(winner);
       Display.disable();
+      let winningCombo = Board.getWinningCombo();
+      Display.changeWinnerDisplay(winningCombo);
+      sleep(1000).then(() => {
+        Display.showWinningMessage(winner);
+      });
     } else if (tie) {
-      Display.showTieMessage();
+      sleep(1000).then(() => {
+        Display.showTieMessage();
+      })
     } else {
       changePlayer();
       Display.update(handlePlayerMoveClick, isAiTurn, isOTurn);

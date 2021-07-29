@@ -4,9 +4,10 @@
   --dark-gray: #4d5166;
   --slate-blue: #3b434b;
   --chalk-white: #f7efee;
+  --chalk-yellow: #f5c96c;
+  --chalk-pink: #faa9a9;
   --blue: #72bbbb;
   --blue-light: #72bba65d;
-  --light-pink: #fddfed;
 }
 
 *,
@@ -169,12 +170,12 @@ nav {
 
 .dropdown:hover .btn-dropdown {
   transition: 1s ease-in-out;
-  box-shadow: inset 0px 0px 22px 10px var(--blue);
   -webkit-transition: 1s ease-in-out;
   -moz-transition: 1s ease-in-out;
   -ms-transition: 1s ease-in-out;
   -o-transition: 1s ease-in-out;
   border: 3px double var(--chalk-white);
+  box-shadow: inset 0px 0px 22px 10px var(--blue);
 }
 
 .inactive {
@@ -261,21 +262,21 @@ nav {
 .cell.x::before,
 .cell.x::after,
 .cell.o::before {
-  background-color: #fde26c;
+  background-color: var(--chalk-pink);
 }
 
 .cell.o::before {
-  background-color: #ffd7b4;
+  background-color: var(--chalk-yellow);
 }
 
 .board.x .cell:not(.x):not(.o):hover::before,
 .board.x .cell:not(.x):not(.o):hover::after,
 .board.o .cell:not(.x):not(.o):hover::before {
-  background-color: #fde26c;;
+  background-color: var(--chalk-pink);
 }
 
 .board.o .cell:not(.x):not(.o):hover::before {
-  background-color: #ffd7b4;
+  background-color: var(--chalk-yellow);
 }
 
 .cell.x::before,
@@ -332,6 +333,10 @@ nav {
   background-color: var(--slate-blue);
 }
 
+/********************************************/
+/*********** Winning Display ***************/
+/******************************************/
+
 .visible {
   visibility: visible;
   opacity: 1;
@@ -356,6 +361,38 @@ nav {
   position: absolute;
   top: 54%;
   font-size: 2rem;
+}
+
+
+.winner, .winner.o::after
+{
+  animation: pulse 2s;
+  -webkit-animation: pulse 2s;
+} 
+
+
+@keyframes pulse {
+  0% {
+    background-color: var(--slate-blue);
+  }
+  10% {
+    background-color: #f7efeece;
+  }
+  20% {
+    background-color: var(--slate-blue);
+  }
+  30% {
+    background-color: #f7efeece;
+  }
+  40% {
+    background-color: var(--slate-blue);
+  }
+  50% {
+    background-color: #f7efeece;
+  }
+  60% {
+    background-color: var(--slate-blue);
+  }
 }
 
 /********************************************/

@@ -46,6 +46,7 @@ export const Display = (() => {
       option.addEventListener("click", handleSelectDifficulty);
     });
     removeWinningMessage();
+    removeWinningColor();
     if (playAsX) {
       selectX.classList.add("select");
       selectO.classList.remove("select");
@@ -86,6 +87,21 @@ export const Display = (() => {
   }
 
   /**
+   * Changes display to indicate winning play.
+   * @param {array} winningCombo List of winning cell Ids.
+   */
+  function changeWinnerDisplay(winningCombo) {
+    cellElements.forEach(cell => {
+      winningCombo.forEach(item => {
+        if (cell.id == item) {
+          cell.classList.add("winner");
+          
+        }
+      })
+    })
+  }
+
+  /**
    * Displays a message saying its a tie.
    */
   function showTieMessage() {
@@ -103,6 +119,12 @@ export const Display = (() => {
     boardElement.classList.remove("hidden");
     winningMessage.classList.remove("visible");
     winningMessage.classList.add("hidden");
+  }
+
+  function removeWinningColor() {
+    cellElements.forEach(cell => {
+      cell.classList.remove("winner");
+    })
   }
 
   /**
@@ -172,6 +194,7 @@ export const Display = (() => {
     setMark,
     showWinningMessage,
     showTieMessage,
+    changeWinnerDisplay,
     O_CLASS,
     X_CLASS,
   };
