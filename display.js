@@ -61,7 +61,7 @@ export const Display = (() => {
    * @param {function} e Event for difficulty selection. 
    */
    function updateDifficultyText(e) {
-    dropdownText.textContent = e.target.dataset.value;
+     dropdownText.textContent = e.target.dataset.value;
   }
 
   /**
