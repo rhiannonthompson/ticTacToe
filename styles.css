@@ -84,8 +84,7 @@ p {
 nav {
   min-width: 100vw;
   min-height: 15vh;
-  /* background-color: #72bbbb;; */
-  box-shadow: inset 0px 0px 50px 50px var(--blue);
+  box-shadow: inset 0px 0px 30px 45px var(--blue);
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -355,8 +354,7 @@ nav {
 
 .winningMessage {
   position: absolute;
-  top: 52%;
-  z-index: 0;
+  top: 54%;
   font-size: 2rem;
 }
 
@@ -395,6 +393,10 @@ nav {
 
   .board-container {
     min-width: 65vw;
+  }
+
+  nav {
+    box-shadow: inset 0px 0px 40px 45px var(--blue);
   }
 }
 
