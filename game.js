@@ -137,11 +137,19 @@ export const Game = (() => {
       let winningCombo = Board.getWinningCombo();
       Display.changeWinnerDisplay(winningCombo);
       sleep(1000).then(() => {
-        Display.showWinningMessage(winner);
+        // Stops message display if user has reset while sleeping.
+        let winner = Board.checkWinner();
+        if (winner) {
+          Display.showWinningMessage(winner);
+        }
       });
     } else if (tie) {
       sleep(1000).then(() => {
-        Display.showTieMessage();
+        // Stops message display if user has reset while sleeping.
+        let tie = Board.checkTie(); 
+        if (tie) {
+          Display.showTieMessage();
+        }
       })
     } else {
       changePlayer();
